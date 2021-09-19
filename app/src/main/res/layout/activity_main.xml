@@ -9,28 +9,121 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#5C6BC0">
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
-            android:text="안녕"
-            android:inputType="textPersonName"
+            android:id="@+id/ET_original"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="#333333"
+            android:hint="번역할 내용 입력"
+            android:gravity="center"
+            android:textColor="#F3F3F3"
+            android:textColorHint="#CCCCCC"
+            android:textSize="10pt"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_translation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="204dp"
-            android:text="음성 출력"
+            android:backgroundTint="#333333"
+            android:text="번역"
+            android:textColor="#F3F3F3"
+            app:layout_constraintBottom_toTopOf="@+id/TV_language2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.755"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TV_language1"
+            app:layout_constraintVertical_bias="0.506" />
+
+        <Button
+            android:id="@+id/btn_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#333333"
+            android:text="↕"
+            android:textColor="#F3F3F3"
+            android:textSize="10pt"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/TV_language2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.247"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TV_language1"
+            app:layout_constraintVertical_bias="0.52" />
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#333333"
+            android:text="공유"
+            android:textColor="#F3F3F3"
+            app:layout_constraintBottom_toBottomOf="@+id/TV_translation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ET_original"
+            app:layout_constraintVertical_bias="0.982" />
+
+        <Button
+            android:id="@+id/btn_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="#333333"
+            android:text="복사"
+            android:textColor="#F3F3F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_share"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.976" />
+
+        <TextView
+            android:id="@+id/TV_translation"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="#333333"
+            android:text="테스트"
+            android:textSize="10pt"
+            android:gravity="center"
+            android:textColor="#F3F3F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/TV_language1"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:background="#2B2B2B"
+            android:text="한국어"
+            android:textAlignment="center"
+            android:textColor="#F3F3F3"
+            android:textSize="10pt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/ET_original" />
+
+        <TextView
+            android:id="@+id/TV_language2"
+            android:layout_width="411dp"
+            android:layout_height="wrap_content"
+            android:background="#2B2B2B"
+            android:text="영어"
+            android:textAlignment="center"
+            android:textColor="#F3F3F3"
+            android:textSize="10pt"
+            app:layout_constraintBottom_toTopOf="@+id/TV_translation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
