@@ -26,6 +26,74 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+        translation();
+        share();
+        copy();
+        changeLanguage();
+
+    }
+
+    @SuppressLint("HandlerLeak")
+    Handler papago_handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle bundle = msg.getData();
+            String resultWord = bundle.getString("resultWord");
+            TV_result.setText(resultWord);
+        }
+    };
+
+    void copy() {
+        btn_copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clipData = ClipData.newPlainText("translator", TV_result.getText().toString());
+                clipboardManager.setPrimaryClip(clipData);
+
+                //복사가 되었다면 토스트메시지 노출
+                Toast.makeText(getApplicationContext(), "복사되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    void share() {
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+                Sharing_intent.setType(TV_result.getText().toString());
+
+                String Test_Message = TV_result.getText().toString();
+
+                Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
+
+                Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
+                startActivity(Sharing);
+            }
+        });
+
+    }
+
+    public void changeLanguage() {
+        btn_language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (language == 0) {
+                    TV_language1.setText("영어");
+                    TV_language2.setText("한국어");
+                    language = 1;
+                } else {
+                    TV_language1.setText("한국어");
+                    TV_language2.setText("영어");
+                    language = 0;
+                }
+            }
+        });
+    }
+
+    void init() {
         btn_language = (Button) findViewById(R.id.btn_language);
         btn_translation = (Button) findViewById(R.id.btn_translation);
         btn_copy = (Button) findViewById(R.id.btn_copy);
@@ -34,27 +102,9 @@ public class MainActivity extends AppCompatActivity {
         TV_result = (TextView) findViewById(R.id.TV_translation);
         TV_language1 = (TextView) findViewById(R.id.TV_language1);
         TV_language2 = (TextView) findViewById(R.id.TV_language2);
+    }
 
-        btn_language.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                language = changeLanguage();
-            }
-        });
-
-        btn_copy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                copy(TV_result.getText().toString());
-            }
-        });
-
-        btn_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                share(TV_result.getText().toString());
-            }
-        });
+    void translation() {
 
         btn_translation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,49 +135,6 @@ public class MainActivity extends AppCompatActivity {
                 }.start();
             }
         });
-    }
-
-    @SuppressLint("HandlerLeak")
-    Handler papago_handler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            Bundle bundle = msg.getData();
-            String resultWord = bundle.getString("resultWord");
-            TV_result.setText(resultWord);
-        }
-    };
-
-    void copy(String s) {
-        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("translator", s);
-        clipboardManager.setPrimaryClip(clipData);
-
-        //복사가 되었다면 토스트메시지 노출
-        Toast.makeText(getApplicationContext(), "복사되었습니다.", Toast.LENGTH_SHORT).show();
-    }
-
-    void share(String s) {
-        Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
-        Sharing_intent.setType(s);
-
-        String Test_Message = "공유할 Text";
-
-        Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
-
-        Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
-        startActivity(Sharing);
-    }
-
-    public int changeLanguage() {
-        if (language == 0) {
-            TV_language1.setText("영어");
-            TV_language2.setText("한국어");
-            return 1;
-        } else {
-            TV_language1.setText("한국어");
-            TV_language2.setText("영어");
-            return 0;
-        }
     }
 
 }
