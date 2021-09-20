@@ -1,25 +1,31 @@
 package com.tts.translator;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_language, btn_translation, btn_share, btn_copy;
+    Button btn_language, btn_translation, btn_share, btn_copy, btn_tts;
     EditText ET_input;
     TextView TV_result, TV_language1, TV_language2;
+    TextToSpeech tts;
     int language = 0;
 
     @Override
@@ -31,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         share();
         copy();
         changeLanguage();
+        readText();
 
     }
 
@@ -93,6 +100,19 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    void readText() {
+        btn_tts.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override public void onClick(View v) {
+                String text = TV_result.getText().toString();
+
+                tts.setPitch(1.0f);
+                tts.setSpeechRate(1.0f);
+                tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+    }
+
     void init() {
         btn_language = (Button) findViewById(R.id.btn_language);
         btn_translation = (Button) findViewById(R.id.btn_translation);
@@ -102,6 +122,16 @@ public class MainActivity extends AppCompatActivity {
         TV_result = (TextView) findViewById(R.id.TV_translation);
         TV_language1 = (TextView) findViewById(R.id.TV_language1);
         TV_language2 = (TextView) findViewById(R.id.TV_language2);
+        btn_tts = (Button) findViewById(R.id.btn_tts);
+
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status!=android.speech.tts.TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.KOREAN);
+                }
+            }
+        });
     }
 
     void translation() {
@@ -137,4 +167,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+            tts = null;
+        }
+        super.onDestroy();
+    }
 }
