@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/translator-with-tts/app/src/main/res/drawable/btn_back.xml" value="0.5275" />
+        <entry key="..\:/AndroidStudioProjects/translator-with-tts/app/src/main/res/drawable/shape_btn.xml" value="0.5275" />
+        <entry key="..\:/AndroidStudioProjects/translator-with-tts/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/choi7/AndroidStudioProjects/translator-with-tts/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/choi7/AndroidStudioProjects/translator-with-tts/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14814814814814814" />
         <entry key="..\:/Users/choi7/AndroidStudioProjects/translator/app/src/main/res/layout/activity_main.xml" value="0.176" />

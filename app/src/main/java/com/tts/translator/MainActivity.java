@@ -15,6 +15,7 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_language, btn_translation, btn_share, btn_copy, btn_tts;
     EditText ET_input;
-    TextView TV_result, TV_language1, TV_language2;
+    TextView TV_result;
+    ImageView TV_language1, TV_language2;
     TextToSpeech tts;
     int language = 0;
 
@@ -88,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (language == 0) {
-                    TV_language1.setText("영어");
-                    TV_language2.setText("한국어");
+                    TV_language1.setBackgroundResource(R.drawable.red_english);
+                    TV_language2.setBackgroundResource(R.drawable.orange_korean);
                     language = 1;
                 } else {
-                    TV_language1.setText("한국어");
-                    TV_language2.setText("영어");
+                    TV_language1.setBackgroundResource(R.drawable.red_korean);
+                    TV_language2.setBackgroundResource(R.drawable.orange_english);
                     language = 0;
                 }
             }
@@ -120,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
         btn_share = (Button) findViewById(R.id.btn_share);
         ET_input = (EditText) findViewById(R.id.ET_original);
         TV_result = (TextView) findViewById(R.id.TV_translation);
-        TV_language1 = (TextView) findViewById(R.id.TV_language1);
-        TV_language2 = (TextView) findViewById(R.id.TV_language2);
+        TV_language1 = (ImageView) findViewById(R.id.TV_language1);
+        TV_language2 = (ImageView) findViewById(R.id.TV_language2);
         btn_tts = (Button) findViewById(R.id.btn_tts);
 
         tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
